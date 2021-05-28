@@ -1,6 +1,6 @@
 export default function Todo(props) {
 
-  function toggleComplete(id) {
+  const toggleComplete = id => {
     const updatedTasks = props.tasks.map(task => {
       if (id === task.id) {
         return { ...task, completed: !task.completed };
@@ -10,7 +10,7 @@ export default function Todo(props) {
     props.setTasks(updatedTasks);
   }
 
-  function editTask(id) {
+  const editTask = id => {
     const name = prompt('What would you like to rename the task to?');
     const updatedTasks = props.tasks.map(task => {
       if (id === task.id) {
