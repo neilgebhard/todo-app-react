@@ -14,12 +14,12 @@ function App(props) {
   const [filter, setFilter] = useState('All');
   const [name, setName] = useState('');
 
-  function addTask(name) {
+  const addTask = name => {
     const newTask = { id: nanoid(), name: name, completed: false };
     setTasks([...tasks, newTask]);
   }
 
-  function deleteTask(id) {
+  const deleteTask = id => {
     const updatedTasks = tasks.filter(task => task.id !== id);
     setTasks(updatedTasks);
   }
