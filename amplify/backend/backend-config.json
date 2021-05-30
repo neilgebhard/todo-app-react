@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "reacttodoapp721af00b": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

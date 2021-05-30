@@ -7,6 +7,8 @@ import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 import './App.css';
 
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
   const [filter, setFilter] = useState('All');
@@ -42,6 +44,7 @@ function App(props) {
 
   return (
     <div className="todoapp stack-large">
+      <AmplifySignOut />
       <h1>Todo App</h1>
       <TodoInput setName={setName} addTask={addTask} name={name} />
       <FilterList setFilter={setFilter} />
@@ -52,4 +55,4 @@ function App(props) {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
