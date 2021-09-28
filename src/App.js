@@ -32,7 +32,7 @@ function App() {
         query: createTodo,
         variables: { input: newTask },
       });
-      setTasks([...tasks, newTask.data.createTodo]);
+      setTasks((tasks) => [...tasks, newTask.data.createTodo]);
     }
   };
 
