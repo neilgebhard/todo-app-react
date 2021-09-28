@@ -1,24 +1,28 @@
-import FilterButton from './FilterButton';
+import FilterButton from "./FilterButton";
 
-export default function FilterList(props) {
-
+const FilterList = ({ setFilter, filter }) => {
   const FILTER_MAP = {
     All: () => true,
-    Active: task => !task.completed,
-    Completed: task => task.completed
-  }
+    Active: (task) => !task.completed,
+    Completed: (task) => task.completed,
+  };
 
   const FILTER_NAMES = Object.keys(FILTER_MAP);
 
-  function updateList(name) {
-    props.setFilter(name);
-  }
+  const updateList = (name) => {
+    setFilter(name);
+  };
 
-	const filterList = FILTER_NAMES.map(name => <FilterButton name={name} key={name} updateList={updateList} />);
+  const filterList = FILTER_NAMES.map((name) => (
+    <FilterButton
+      name={name}
+      key={name}
+      updateList={updateList}
+      filter={filter}
+    />
+  ));
 
-	return (
-		<div className="filters btn-group stack-exception">
-			{filterList}
-		</div>
-	);
-}
+  return <div className="btn-filter-group">{filterList}</div>;
+};
+
+export default FilterList;

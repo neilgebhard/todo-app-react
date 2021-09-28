@@ -1,6 +1,8 @@
-# A todo app in React
+# A todo app in React and AWS Amplify
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). The backend and authentication is supported by [AWS Amplify](https://aws.amazon.com/amplify/) and GraphQL. The animations are done with [Framer Motion](https://www.framer.com/motion/). The CSS is written from scratch. Enjoy 😊
+
+[Check out the Demo](https://main.dwuhwwtuh84l8.amplifyapp.com/).
 
 ### `npm start`
 

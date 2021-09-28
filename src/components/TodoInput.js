@@ -1,24 +1,31 @@
-export default function TodoInput(props) {
-
-	function handleSubmit(e) {
+const TodoInput = ({ addTask, setName, name }) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    props.addTask(props.name);
-    props.setName('');
-  }
+    addTask(name);
+    setName("");
+  };
 
-  function handleChange(e) {
-    props.setName(e.target.value);
-  }
+  const handleChange = (e) => {
+    setName(e.target.value);
+  };
 
-	return (
-		<form onSubmit={handleSubmit}>
-		  <h2 className="label-wrapper">
-		      <label htmlFor="new-todo-input" className="label__lg">
-		          What needs to be done?
-		      </label>
-		  </h2>
-		  <input type="text" id="new-todo-input" className="input input__lg" name="text" autoComplete="off" value={props.name} onChange={handleChange} />
-		  <button type="submit" className="btn btn__primary btn__lg">Add</button>
-		</form>
-	);
-}
+  return (
+    <form className="form-todo" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        id="input-new-todo"
+        className="input-new-todo"
+        name="text"
+        autoComplete="off"
+        value={name}
+        onChange={handleChange}
+        placeholder="Add new task"
+      />
+      <button type="submit" className="btn btn-primary btn-add">
+        +
+      </button>
+    </form>
+  );
+};
+
+export default TodoInput;

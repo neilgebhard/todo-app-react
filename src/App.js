@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Todo from "./components/Todo";
-import ListHeading from "./components/ListHeading";
+import TodosRemaining from "./components/TodosRemaining";
 import FilterList from "./components/FilterList";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 import { API } from "aws-amplify";
 import { listTodos } from "./graphql/queries";
-import { createTodo, deleteTodo } from "./graphql/mutations";
+import { createTodo, updateTodo, deleteTodo } from "./graphql/mutations";
 import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+import { motion } from "framer-motion";
 import "./App.css";
 
-function App(props) {
+function App() {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("All");
   const [name, setName] = useState("");
@@ -26,16 +27,33 @@ function App(props) {
 
   const addTask = async (name) => {
     if (name) {
-      const newTask = { name: name, completed: false };
-      await API.graphql({ query: createTodo, variables: { input: newTask } });
-      setTasks([...tasks, newTask]);
+      let newTask = { name: name, completed: false };
+      newTask = await API.graphql({
+        query: createTodo,
+        variables: { input: newTask },
+      });
+      setTasks([...tasks, newTask.data.createTodo]);
     }
   };
 
-  const deleteTask = async (id) => {
+  const deleteTask = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
-    await API.graphql({ query: deleteTodo, variables: { input: { id } } });
+    API.graphql({ query: deleteTodo, variables: { input: { id } } });
+  };
+
+  const editTaskName = (id, name) => {
+    API.graphql({
+      query: updateTodo,
+      variables: { input: { id, name } },
+    });
+  };
+
+  const editTaskCompleted = (id, completed) => {
+    API.graphql({
+      query: updateTodo,
+      variables: { input: { id, completed } },
+    });
   };
 
   const FILTER_MAP = {
@@ -54,20 +72,27 @@ function App(props) {
         key={task.id}
         tasks={tasks}
         deleteTask={deleteTask}
+        editTaskName={editTaskName}
+        editTaskCompleted={editTaskCompleted}
         setTasks={setTasks}
       />
     ));
 
   return (
-    <div>
-      <AmplifySignOut />
-      <div className="todoapp">
-        <h1>Todo App</h1>
-        <TodoInput setName={setName} addTask={addTask} name={name} />
-        <FilterList setFilter={setFilter} />
-        <ListHeading taskList={taskList} />
-        <TodoList taskList={taskList} />
+    <div className="container">
+      <div className="btn-signout-wrapper">
+        <AmplifySignOut />
       </div>
+      <motion.div
+        initial={{ y: -200 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", duration: 0.5 }}
+      >
+        <TodoInput setName={setName} addTask={addTask} name={name} />
+        <FilterList setFilter={setFilter} filter={filter} />
+        <TodoList taskList={taskList} />
+        <TodosRemaining taskListLength={taskList.length} />
+      </motion.div>
     </div>
   );
 }
