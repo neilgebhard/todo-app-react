@@ -1,8 +1,0 @@
-{
-  "short_name": "Todo App",
-  "name": "The Sleekest Todo App in the World",
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
-}

@@ -1,13 +1,34 @@
-# A todo app in React and AWS Amplify
+## A todo web app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). The backend and authentication is supported by [AWS Amplify](https://aws.amazon.com/amplify/) and GraphQL. The animations are done with [Framer Motion](https://www.framer.com/motion/). The CSS is written from scratch. Enjoy 😊
+- [General info](#general-info)
+- [Technologies](#technologies)
+- [Setup](#setup)
 
-[Check out the Demo](https://main.dwuhwwtuh84l8.amplifyapp.com/).
+## General info
 
-### `npm start`
+This repository holds the source code for a simple todo web app.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Project is created with:
+
+- [AWS Amplify for auth, storage, and deployment](https://aws.amazon.com/amplify/)
+- React: 17.0.2
+- Framer Motion: 4.1.17
+- GraphQL
+
+## Setup
+
+To run this project, install it locally using npm:
+
+```
+$ cd ./todo-app-react
+$ npm install
+$ npm start
+```
+
+## Demo
+
+The live demo is deployed on AWS Amplify: https://main.dwuhwwtuh84l8.amplifyapp.com/
+
+![Homepage screenshot](screenshot.png)
